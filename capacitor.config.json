@@ -1,0 +1,8 @@
+{
+  "appId": "com.example.smarthome",
+  "appName": "Smart Home Controller",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4285F4">
+    <meta name="description" content="Smart Home Control Panel for controlling your home devices">
+    <title>Smart Home Control Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body class="light-theme">
+    <div class="container">
+        <header>
+            <h1>Smart Home Control</h1>
+            <div class="theme-toggle">
+                <span>Theme:</span>
+                <select id="themeSelector">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="neon">Neon</option>
+                    <option value="minimal">Minimal</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="bluetooth-status">
+            <div id="bluetooth-indicator" class="disconnected">
+                <i class="fab fa-bluetooth-b"></i>
+            </div>
+            <span id="connection-status">Disconnected</span>
+            <button id="connect-button" class="btn">Connect Device</button>
+        </div>
+
+        <div class="device-section">
+            <h2>Lights</h2>
+            <div class="device-grid">
+                <div class="device-card clickable" data-device="light1">
+                    <div class="device-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3>Light 1</h3>
+                        <span class="status-indicator off">OFF</span>
+                    </div>
+                </div>
+
+                <div class="device-card clickable" data-device="light2">
+                    <div class="device-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3>Light 2</h3>
+                        <span class="status-indicator off">OFF</span>
+                    </div>
+                </div>
+
+                <div class="device-card clickable" data-device="light3">
+                    <div class="device-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3>Light 3</h3>
+                        <span class="status-indicator off">OFF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="device-section">
+            <h2>Sockets</h2>
+            <div class="device-grid">
+                <div class="device-card clickable" data-device="socket1">
+                    <div class="device-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3>Socket 1</h3>
+                        <span class="status-indicator off">OFF</span>
+                    </div>
+                </div>
+
+                <div class="device-card clickable" data-device="socket2">
+                    <div class="device-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3>Socket 2</h3>
+                        <span class="status-indicator off">OFF</span>
+                    </div>
+                </div>
+
+                <div class="device-card clickable" data-device="socket3">
+                    <div class="device-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3>Socket 3</h3>
+                        <span class="status-indicator off">OFF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="device-section">
+            <h2>Fan</h2>
+            <div class="device-grid">
+                <div class="device-card clickable" data-device="fan">
+                    <div class="device-icon">
+                        <i class="fas fa-fan"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3>Fan</h3>
+                        <span class="status-indicator off">OFF</span>
+                    </div>
+                </div>
+                
+                <div class="device-card fan-speed-control" data-device="fan-speed">
+                    <div class="speed-control-wrapper">
+                        <div class="circular-speed-control">
+                            <div class="speed-dial">
+                                <div class="dial-center">
+                                    <span class="speed-value">0</span>
+                                </div>
+                                <div class="dial-marker marker-0" data-speed="0">Off</div>
+                                <div class="dial-marker marker-1" data-speed="1">1</div>
+                                <div class="dial-marker marker-2" data-speed="2">2</div>
+                                <div class="dial-marker marker-3" data-speed="3">3</div>
+                                <div class="dial-marker marker-4" data-speed="4">4</div>
+                                <div class="dial-marker marker-5" data-speed="5">5</div>
+                            </div>
+                        </div>
+                        <h3>Fan Speed Control</h3>
+                        <div class="speed-labels-text">
+                            <span data-speed="0">Off</span>
+                            <span data-speed="1">Very Low</span>
+                            <span data-speed="2">Low</span>
+                            <span data-speed="3">Medium</span>
+                            <span data-speed="4">High</span>
+                            <span data-speed="5">Maximum</span>
+                        </div>
+                        <!-- Hidden slider for backward compatibility -->
+                        <input type="range" class="speed-slider" min="0" max="5" value="0" step="1" disabled style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Devices Section -->
+        <div class="device-section custom-devices-section">
+            <h2>Custom Devices</h2>
+            <div id="custom-device-grid" class="device-grid">
+                <!-- Custom devices will be added here dynamically -->
+            </div>
+            <div class="add-device-container">
+                <button id="add-device-btn" class="add-device-btn">
+                    <i class="fas fa-plus"></i> Add New Device
+                </button>
+            </div>
+        </div>
+        
+        <!-- Custom Device Modal -->
+        <div id="custom-device-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Add New Device</h2>
+                <form id="custom-device-form">
+                    <div class="form-group">
+                        <label for="device-name">Device Name: <span class="form-help">(Name your device)</span></label>
+                        <input type="text" id="device-name" required placeholder="e.g., Kitchen Light, Bedroom Fan, TV" autofocus>
+                        <div class="name-section">
+                            <div class="section-title">Rooms:</div>
+                            <div class="name-suggestions">
+                                <span class="suggestion-tag" data-name="Living Room">Living Room</span>
+                                <span class="suggestion-tag" data-name="Bedroom">Bedroom</span>
+                                <span class="suggestion-tag" data-name="Kitchen">Kitchen</span>
+                                <span class="suggestion-tag" data-name="Bathroom">Bathroom</span>
+                                <span class="suggestion-tag" data-name="Office">Office</span>
+                                <span class="suggestion-tag" data-name="Garage">Garage</span>
+                                <span class="suggestion-tag" data-name="Porch">Porch</span>
+                            </div>
+                            <div class="section-title">Common Appliances:</div>
+                            <div class="appliance-suggestions">
+                                <span class="suggestion-tag" data-name="TV">TV</span>
+                                <span class="suggestion-tag" data-name="Heater">Heater</span>
+                                <span class="suggestion-tag" data-name="AC">AC</span>
+                                <span class="suggestion-tag" data-name="Light">Light</span>
+                                <span class="suggestion-tag" data-name="Fan">Fan</span>
+                                <span class="suggestion-tag" data-name="Lamp">Lamp</span>
+                                <span class="suggestion-tag" data-name="Curtain">Curtain</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="device-location">Location/Room: <span class="form-help">(Optional)</span></label>
+                        <input type="text" id="device-location" placeholder="e.g., First Floor, Upstairs, Garage">
+                    </div>
+                    <div class="form-group">
+                        <label for="device-type">Device Type:</label>
+                        <select id="device-type" required>
+                            <option value="light">Light</option>
+                            <option value="socket">Socket</option>
+                            <option value="fan">Fan</option>
+                            <option value="ac">Air Conditioner</option>
+                            <option value="tv">TV</option>
+                            <option value="thermostat">Thermostat</option>
+                            <option value="camera">Camera</option>
+                            <option value="speaker">Speaker</option>
+                            <option value="door">Door/Gate</option>
+                            <option value="curtain">Curtain/Blind</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="type-suggestions">
+                            <span class="type-suggestion-tag" data-type="light">Light</span>
+                            <span class="type-suggestion-tag" data-type="socket">Socket</span>
+                            <span class="type-suggestion-tag" data-type="fan">Fan</span>
+                            <span class="type-suggestion-tag" data-type="ac">AC</span>
+                            <span class="type-suggestion-tag" data-type="tv">TV</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="device-icon">Icon:</label>
+                        <select id="device-icon" required>
+                            <option value="lightbulb">Light Bulb</option>
+                            <option value="plug">Plug</option>
+                            <option value="fan">Fan</option>
+                            <option value="snowflake">Air Conditioner</option>
+                            <option value="tv">TV</option>
+                            <option value="thermometer-half">Thermostat</option>
+                            <option value="video">Camera</option>
+                            <option value="volume-up">Speaker</option>
+                            <option value="door-open">Door</option>
+                            <option value="blinds">Curtain</option>
+                            <option value="lock">Lock</option>
+                            <option value="coffee">Coffee Machine</option>
+                            <option value="shower">Shower</option>
+                            <option value="desktop">Computer</option>
+                            <option value="power-off">Power Button</option>
+                            <option value="wifi">WiFi</option>
+                            <option value="home">Home</option>
+                        </select>
+                    </div>
+                    <div class="form-preview">
+                        <div class="preview-label">Preview:</div>
+                        <div class="device-preview">
+                            <div class="preview-icon"><i class="fas fa-lightbulb"></i></div>
+                            <div class="preview-name">New Device</div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Device</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="notification">
+            <p>Note: This is a web-based simulation. Real Bluetooth functionality requires a native mobile app.</p>
+        </div>
+        
+        <!-- Audio elements for sound effects -->
+        <audio id="switch-on-sound" preload="auto">
+            <source src="/sounds/switch-on.mp3" type="audio/mp3">
+        </audio>
+        <audio id="switch-off-sound" preload="auto">
+            <source src="/sounds/switch-off.mp3" type="audio/mp3">
+        </audio>
+        <audio id="fan-speed-sound" preload="auto">
+            <source src="/sounds/fan-speed.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/sw-register.js"></script>
+</body>
+</html>
